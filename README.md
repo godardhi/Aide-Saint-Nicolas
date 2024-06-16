@@ -2,7 +2,7 @@
 Ce projet vise à aider Saint-Nicolas (Vecoven) à optimiser sa tournée des villes de
 Belgique. En terme de programmation.
 
-1 Problème du voyage de commerce
+1 Problème du voyage de commerce\n
 Saint-Nicolas voudrait optimiser sa tournée des villes de Belgique. Le problème est
 modélisé de la manière suivante. Soit une liste {v_1, . . . , v_N } de N villes représentées par
 leurs coordonnées (x_j , y_j ) (avec j ∈ {1, . . . , N}). On aimerait trouver un ordre de visite
