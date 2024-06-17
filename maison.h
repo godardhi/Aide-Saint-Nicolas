@@ -1,6 +1,8 @@
 #ifndef MAISON_H
 #define MAISON_H
 
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct 
 {
