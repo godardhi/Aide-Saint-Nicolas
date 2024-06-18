@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define INITIAL_TEST_CAPACITY 5
  
 typedef struct 
 {
@@ -17,7 +18,7 @@ typedef struct
     char region[10];
 }Maison;
 
- // Crée une maison nommée 'maison' et situé à la position  (xpos, ypos) à la adress 'adress'
+ // Crée des instances 'maison' 
 Maison* createMaison(const char *data_file);
 
 

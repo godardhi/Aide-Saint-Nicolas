@@ -1,7 +1,7 @@
 #include "maison.h"
 
 /*
-    TODO : add
+    TODO : remove the need of initial capacity (i.e realloc)
 */
 
 Maison* createMaison(const char *data_file)
@@ -11,71 +11,67 @@ Maison* createMaison(const char *data_file)
     FILE *fileCSV = fopen(data_file, "r");
 
 
-    Maison *tabMaison = (Maison *)malloc(1*sizeof(Maison));
+    Maison *tabMaison = (Maison *)malloc(INITIAL_TEST_CAPACITY*sizeof(Maison));
 
-   // Maison *maison_tmp;
-
-    int ligne=0;
-    int colonnes=0;
+    int lignedeCSV=0;
+    int colonnesdeCSV=0;
 
     if(fileCSV!=NULL)
     {
-        while(fgets(buffer, sizeof(buffer), fileCSV))
+        while(fgets(buffer, sizeof(buffer), fileCSV) && lignedeCSV<=INITIAL_TEST_CAPACITY)
         {
-            colonnes=0;
-            ligne++;
-            
-            if(ligne==1)
+            if(lignedeCSV==0)
             {
+                lignedeCSV++;
                 continue;
             }
-
+            
+         
             char *valeur = strtok(buffer, ",");
-            char *endptr;
 
-            while(valeur)
+            while(valeur && colonnesdeCSV<=7)
             {
-                if(colonnes==0)
+                if(colonnesdeCSV==0)
                 {
-                    tabMaison[0].xpos = strtod(valeur, &endptr);
+                    tabMaison[lignedeCSV-1].xpos = strtod(valeur, NULL);
                 }
-                if(colonnes==1)
+                if(colonnesdeCSV==1)
                 {
-                    tabMaison[0].ypos = strtod(valeur, &endptr);
+                    tabMaison[lignedeCSV-1].ypos = strtod(valeur, NULL);
                 }
-                if(colonnes==2)
+                if(colonnesdeCSV==2)
                 {
-                    tabMaison[0].lat = strtod(valeur, &endptr);
+                    tabMaison[lignedeCSV-1].lat = strtod(valeur, NULL);
                 }
-                if(colonnes==3)
+                if(colonnesdeCSV==3)
                 {
-                    tabMaison[0].log = strtod(valeur, &endptr);
+                    tabMaison[lignedeCSV-1].log = strtod(valeur, NULL);
                 }
-                if(colonnes==4)
+                if(colonnesdeCSV==4)
                 {
-                    strcpy(tabMaison[0].adress, valeur);
+                    strcpy(tabMaison[lignedeCSV-1].adress, valeur);
                 }
-                if(colonnes==5)
+                if(colonnesdeCSV==5)
                 {
-                    tabMaison[0].numMaison = strtod(valeur, &endptr);
+                    tabMaison[lignedeCSV-1].numMaison = strtod(valeur, NULL);
                 }
-                if(colonnes==6)
+                if(colonnesdeCSV==6)
                 {
-                    tabMaison[0].postcode = strtod(valeur, &endptr);
+                    tabMaison[lignedeCSV-1].postcode = strtod(valeur, NULL);
                 }
 
-                if(colonnes==7)
+                if(colonnesdeCSV==7)
                 {
-                    strcpy(tabMaison[0].region, valeur);
+                    strcpy(tabMaison[lignedeCSV-1].region, valeur);
                 }
-                //printf("%s", valeur);
-                valeur  =strtok(NULL, ","); 
-                colonnes++;
+                valeur =strtok(NULL, ","); 
+                colonnesdeCSV++;
             }
 
-          break;
-
-
+            // Move to a new data line
+            lignedeCSV++;
+               // Rest the column to zero for a new data line 
+            colonnesdeCSV=0;
         }
     }
 
@@ -91,7 +87,8 @@ int main()
 
     
     printf("(%f,%f)", mesmaison[0].xpos, mesmaison[0].ypos);
+    printf("(%f,%f)", mesmaison[1].xpos, mesmaison[1].ypos);
     
-    
+    free(mesmaison);
     return 0;
 }
