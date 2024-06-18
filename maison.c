@@ -1,10 +1,14 @@
 #include "maison.h"
 
-Maison* createMaison(const char *adress, double x, double y)
+/*
+    TODO : add
+*/
+
+Maison* createMaison(const char *data_file)
 {
     char buffer[10000];
 
-    FILE *fileCSV = fopen(adress, "r");
+    FILE *fileCSV = fopen(data_file, "r");
 
 
     Maison *tabMaison = (Maison *)malloc(1*sizeof(Maison));
@@ -83,7 +87,7 @@ Maison* createMaison(const char *adress, double x, double y)
 int main()
 {
     double x,y;
-    Maison *mesmaison = createMaison("openaddress-liège.csv",x,y);
+    Maison *mesmaison = createMaison("openaddress-liège.csv");
 
     
     printf("(%f,%f)", mesmaison[0].xpos, mesmaison[0].ypos);

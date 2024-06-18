@@ -18,7 +18,7 @@ typedef struct
 }Maison;
 
  // Crée une maison nommée 'maison' et situé à la position  (xpos, ypos) à la adress 'adress'
-Maison* createMaison(const char *adress, double x, double y);
+Maison* createMaison(const char *data_file);
 
 
 
