@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define INITIAL_TEST_CAPACITY 5
+#include <math.h>
+#define INITIAL_TEST_CAPACITY 2
  
 typedef struct 
 {
@@ -12,14 +13,30 @@ typedef struct
     double ypos;
     double lat;
     double log;
-    char adress[10];
+    char adress[50];
     int numMaison;
     int postcode;
-    char region[10];
+    char region[50];
 }Maison;
 
  // Crée des instances 'maison' 
 Maison* createMaison(const char *data_file);
+
+// Renvoie les coordonées x,y d'une maison
+double getMaisonX(Maison *maison);
+double getMaisonY(Maison *maison);
+
+
+//Renvoie l'adress d'une maison
+const char *getMaisonAdress(Maison *maison);
+
+
+// Renvoie la distance Euclidienne entre deux maisons
+double distanceBetweenMaisons(Maison *m1, Maison *m2);
+
+// Libère la mémoire prise par une maison
+void freeMaison(Maison *town);
+
 
 
 

@@ -14,7 +14,7 @@ Maison* createMaison(const char *data_file)
     Maison *tabMaison = (Maison *)malloc(INITIAL_TEST_CAPACITY*sizeof(Maison));
 
     int lignedeCSV=0;
-    int colonnesdeCSV=0;
+    int colonnesdeCSV=0; 
 
     if(fileCSV!=NULL)
     {
@@ -70,7 +70,7 @@ Maison* createMaison(const char *data_file)
 
             // Move to a new data line
             lignedeCSV++;
-               // Rest the column to zero for a new data line 
+            // Rest the column to zero for a new data line 
             colonnesdeCSV=0;
         }
     }
@@ -80,15 +80,41 @@ Maison* createMaison(const char *data_file)
     return tabMaison;
 }
 
+double getMaisonX(Maison *maison)
+{
+
+     return maison->xpos;
+}
+
+double getMaisonY(Maison *maison)
+{
+     return maison->ypos;
+}
+
+
+const char *getMaisonAdress(Maison *maison)
+{
+    return maison->adress;
+}
+
+double distanceBetweenMaisons(Maison *m1, Maison *m2)
+{
+    double dx = m1->xpos - m2->xpos;
+    double dy = m1->ypos - m2->ypos;
+
+    return sqrt( dx * dx + dy * dy);
+}
+
+void freeMaison(Maison *town)
+{
+    free(town);
+}
 int main()
 {
-    double x,y;
     Maison *mesmaison = createMaison("openaddress-liège.csv");
 
-    
-    printf("(%f,%f)", mesmaison[0].xpos, mesmaison[0].ypos);
-    printf("(%f,%f)", mesmaison[1].xpos, mesmaison[1].ypos);
-    
-    free(mesmaison);
+    freeMaison(mesmaison);
+
+
     return 0;
 }
