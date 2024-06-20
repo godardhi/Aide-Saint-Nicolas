@@ -108,13 +108,5 @@ double distanceBetweenMaisons(Maison *m1, Maison *m2)
 void freeMaison(Maison *town)
 {
     free(town);
-}
-int main()
-{
-    Maison *mesmaison = createMaison("openaddress-liège.csv");
-
-    freeMaison(mesmaison);
-
-
-    return 0;
+    town=NULL;
 }
