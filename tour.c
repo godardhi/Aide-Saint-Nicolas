@@ -113,16 +113,14 @@ Tour *createTourFromFile(char *filename)
     return tourChâine;
 }
 
-int main()
+void freetour(Tour *tour, int freeTown)
 {
-    Tour *t = createTourFromFile("openaddress-liège.csv");
-
-    Tour *p=t;
-    while(p!=NULL)
+    if(freeTown>=0)
     {
-        printf("address: %s (%f,%f)\n", p->ad, p->xpos,p->ypos);
-        p=p->newAdrees;
+        free(tour->ad);
+        free(tour->newAdrees);
+        free(tour);
+        freeMaison(tour);
     }
-    free(p);
-    return 0;
 }
+
