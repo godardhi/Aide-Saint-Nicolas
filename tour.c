@@ -156,35 +156,3 @@ void addMaisonAtTourEnd(Tour *tour, Maison *maison)
 
 }
 
-int main()
-{
-    Tour *tvide = NULL;
-    Tour *t;
-
-    Maison *maison = malloc(sizeof(Maison));
-    t = (Tour *)malloc(sizeof(Tour));
-
-    strcpy(maison->adress, "House 1");
-
-    maison->xpos = 0.19;
-    maison->ypos = -0.29;
-
-    
-
-    addMaisonAtTourEnd(t,maison);
-    addMaisonAtTourEnd(t,maison);
-    addMaisonAtTourEnd(t,maison);
-
-    while(t!=NULL)
-    {
-        printf("%s: %.2f,%.2f\n", t->ad, t->xpos,t->ypos);
-        t=t->newAdrees;
-    }
-
-    freetour(t,1);
-
-    if(t)
-
-    return 0;
-}
-
