@@ -3,22 +3,22 @@
 
 
 
-Tour *createEmptyTour(void)
+TourPos *createEmptyTour(void)
 {
-    Tour *emptytour=NULL;
+    TourPos *emptytour=NULL;
 
     return emptytour; 
 }
 
-Tour *createTourFromFile(char *filename)
+TourPos *createTourFromFile(char *filename)
 {
     char buffer[10000];
 
     FILE *fileCSV = fopen(filename, "r");
 
-    Tour *p, *new;
+    TourPos *p, *new;
 
-    Tour *tourChâine= NULL;
+    TourPos *tourChâine= NULL;
 
     int lignedeCSV=0;
     int colonnesdeCSV=0; 
@@ -35,7 +35,7 @@ Tour *createTourFromFile(char *filename)
 
             char *valeur = strtok(buffer, ",");
 
-            new = (Tour *)malloc(sizeof(Tour));
+            new = (TourPos *)malloc(sizeof(TourPos));
 
             if(new!=NULL)
             {
@@ -114,9 +114,9 @@ Tour *createTourFromFile(char *filename)
 }
 
 
-void freetour(Tour *tour, int freeTown)
+void freetour(TourPos *tour, int freeTown)
 {
-    Tour *tmp;
+    TourPos *tmp;
     if(freeTown>=0)
     {
         while(tour!=NULL)
@@ -128,12 +128,12 @@ void freetour(Tour *tour, int freeTown)
     }
 }
 
-void addMaisonAtTourEnd(Tour *tour, Maison *maison)
+void addMaisonAtTourEnd(TourPos *tour, Maison *maison)
 {
-    Tour *new=NULL;
-    Tour *p=NULL;
+    TourPos *new=NULL;
+    TourPos *p=NULL;
 
-    new=(Tour*)malloc(sizeof(Tour));
+    new=(TourPos*)malloc(sizeof(TourPos));
     strcpy(new->ad,maison->adress);
     new->xpos = maison->xpos;
     new->ypos = maison->ypos;
@@ -142,17 +142,64 @@ void addMaisonAtTourEnd(Tour *tour, Maison *maison)
 
     if(tour!=NULL)
     {
-
         for(p=tour; p->newAdrees!=NULL; p=p->newAdrees)
         {}
 
         p->newAdrees=new;
-
-
     }else
     {
         tour = new;
     }
 
+}
+
+void addMaisonAfterTourPosition(TourPos *tour, Tour *pos, Maison *maison)
+{
+    TourPos *new= malloc(sizeof(TourPos));
+
+    TourPos *p, *q;
+
+    strcpy(new->ad,maison->adress);
+    new->xpos = maison->xpos;
+    new->ypos = maison->ypos;
+    
+    if(tour!=NULL)
+    {
+        p=tour;
+        while(p!=pos->queuDeTourpos)
+        {
+            p=p->newAdrees;
+        }
+
+        if(p->newAdrees==NULL)
+        {
+            p->newAdrees = new;
+            new->newAdrees=NULL;
+        }else
+        {
+            puts("addMaisonAfterTourPosition : adding a node (maison) in the middle of chain (tour)");
+            exit(1);
+        }
+
+
+    }else{
+        tour = new;
+        new->newAdrees=NULL;
+    }
+}
+
+Tour *getTourStartPosition(TourPos *tour)
+{
+    Tour *headOfTour=NULL;
+    if(tour!=NULL)
+    {
+        headOfTour->queuDeTourpos = tour;
+
+    }else
+    {
+        puts("getTourStartPosition : empty 'tour passed'");
+    }
+
+    return headOfTour;
 }
 
