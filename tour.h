@@ -1,6 +1,8 @@
 #ifndef TOUR_H
 #define TOUR_H
 
+#include "maison.h"
+
 
 typedef struct tour
 {

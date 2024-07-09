@@ -113,14 +113,78 @@ Tour *createTourFromFile(char *filename)
     return tourChâine;
 }
 
+
 void freetour(Tour *tour, int freeTown)
 {
+    Tour *tmp;
     if(freeTown>=0)
     {
-        free(tour->ad);
-        free(tour->newAdrees);
-        free(tour);
-        freeMaison(tour);
+        while(tour!=NULL)
+        {
+            tmp = tour;
+            tour = tour->newAdrees;
+            free(tmp);
+        }
     }
+}
+
+void addMaisonAtTourEnd(Tour *tour, Maison *maison)
+{
+    Tour *new=NULL;
+    Tour *p=NULL;
+
+    new=(Tour*)malloc(sizeof(Tour));
+    strcpy(new->ad,maison->adress);
+    new->xpos = maison->xpos;
+    new->ypos = maison->ypos;
+    
+    new->newAdrees=NULL;
+
+    if(tour!=NULL)
+    {
+
+        for(p=tour; p->newAdrees!=NULL; p=p->newAdrees)
+        {}
+
+        p->newAdrees=new;
+
+
+    }else
+    {
+        tour = new;
+    }
+
+}
+
+int main()
+{
+    Tour *tvide = NULL;
+    Tour *t;
+
+    Maison *maison = malloc(sizeof(Maison));
+    t = (Tour *)malloc(sizeof(Tour));
+
+    strcpy(maison->adress, "House 1");
+
+    maison->xpos = 0.19;
+    maison->ypos = -0.29;
+
+    
+
+    addMaisonAtTourEnd(t,maison);
+    addMaisonAtTourEnd(t,maison);
+    addMaisonAtTourEnd(t,maison);
+
+    while(t!=NULL)
+    {
+        printf("%s: %.2f,%.2f\n", t->ad, t->xpos,t->ypos);
+        t=t->newAdrees;
+    }
+
+    freetour(t,1);
+
+    if(t)
+
+    return 0;
 }
 
