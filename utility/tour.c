@@ -266,6 +266,23 @@ int getTourSize(TourPos *tour)
 
 double getTourLength(TourPos *tour)
 {
-    
+    double somme=0;
+
+    double x,y;
+
+    double dx,dy;
+
+    TourPos *p=tour;
+    if(tour!=NULL)
+    {
+        // get the tour size  using getTourSize
+        // loop through size
+        // get maions at position position+1 in tour
+        /*
+             do calculations resp. x nd y
+             appy the sqrt
+        */        
+        //update the sum 
+    }
 }
 
