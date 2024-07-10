@@ -203,3 +203,69 @@ Tour *getTourStartPosition(TourPos *tour)
     return headOfTour;
 }
 
+Tour *getNextTour(Tour* pos, TourPos *tour)
+{
+    TourPos *p=tour;
+    if(tour!=NULL)
+    {
+        while(p!=NULL)
+        {
+            if(p==pos)
+            {
+                p=p->newAdrees;
+                break;
+            }
+            p=p->newAdrees;
+        }
+
+        pos->queuDeTourpos = p;
+    }else
+    {
+        puts("getNextTour : le tour est vide");
+    }
+    return pos;
+}
+
+Maison *getMaisonAtPosition(Tour *pos, TourPos *tour)
+{
+    Maison *maison;
+    TourPos *p=tour;
+
+    if(tour!=NULL)
+    {
+        while(p!=NULL)
+        {
+            if(p==pos)
+            {
+                strcpy(maison->adress,p->ad);
+                maison->xpos = p->xpos;
+                maison->ypos = p->ypos;
+                break;
+            }
+            p=p->newAdrees;
+        }
+    }
+
+    return maison;
+
+}
+
+int getTourSize(TourPos *tour)
+{
+    int nombre;
+
+    TourPos *p=tour;
+    while(p!=NULL)
+    {
+        p=p->newAdrees;
+        nombre++;
+    }
+
+    return nombre-1;
+}
+
+double getTourLength(TourPos *tour)
+{
+    
+}
+
