@@ -15,8 +15,7 @@ typedef struct tourpos
 
 typedef struct tour
 {
-    TourPos *queuDeTourpos;
-        
+    TourPos *headeoftour;
 }Tour;
 
 
@@ -50,7 +49,7 @@ Maison *getMaisonAtPosition(Tour *pos, TourPos *tour);
 int getTourSize(TourPos *tour);
 
 // Renvoie la longueur/distance du tour 
- double getTourLength(TourPos *tour);
+double getTourLength(TourPos *tour);
 
 
 #endif

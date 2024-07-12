@@ -166,7 +166,7 @@ void addMaisonAfterTourPosition(TourPos *tour, Tour *pos, Maison *maison)
     if(tour!=NULL)
     {
         p=tour;
-        while(p!=pos->queuDeTourpos)
+        while(p!=pos->headeoftour)
         {
             p=p->newAdrees;
         }
@@ -190,17 +190,17 @@ void addMaisonAfterTourPosition(TourPos *tour, Tour *pos, Maison *maison)
 
 Tour *getTourStartPosition(TourPos *tour)
 {
-    Tour *headOfTour=NULL;
+    Tour *head=NULL;
     if(tour!=NULL)
     {
-        headOfTour->queuDeTourpos = tour;
+        head->headeoftour = tour;
 
     }else
     {
         puts("getTourStartPosition : empty 'tour passed'");
     }
 
-    return headOfTour;
+    return head;
 }
 
 Tour *getNextTour(Tour* pos, TourPos *tour)
@@ -218,7 +218,7 @@ Tour *getNextTour(Tour* pos, TourPos *tour)
             p=p->newAdrees;
         }
 
-        pos->queuDeTourpos = p;
+        pos->headeoftour = p;
     }else
     {
         puts("getNextTour : le tour est vide");
@@ -272,17 +272,47 @@ double getTourLength(TourPos *tour)
 
     double dx,dy;
 
+    int size=0;
+
     TourPos *p=tour;
     if(tour!=NULL)
     {
+ 
         // get the tour size  using getTourSize
         // loop through size
-        // get maions at position position+1 in tour
+        // get maisons at pos and pos+1 in tour
         /*
-             do calculations resp. x nd y
+             do calculations resp. x and y
              appy the sqrt
         */        
         //update the sum 
+
+        size=getTourSize(tour);
+
+        
+        int it=0;
+        while(it<=size-1 && p!=NULL)
+        {
+            x = p->xpos;
+            y = p->ypos;
+
+            p=p->newAdrees;
+
+            dx = p->xpos;
+            dy = p->ypos;
+
+            double difX = dx - x;
+            double difY = dy - y;
+
+            somme+= sqrt( difX * difX + difY * difY);
+        }
+
+    }else
+    {
+        puts("getTourLength: passed an empty list");
+        exit(1);    
     }
+
+    return somme;
 }
 
