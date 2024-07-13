@@ -3,22 +3,22 @@
 
 #include "maison.h"
 
-
-typedef struct tour
-{
-    struct tourpos *headOfTour;
-    struct tourpos *tailOfTour;
-
-    double TotDistance;
-    int nb_maison;
-
-}Tour;
-
 typedef struct tourpos
 {
     Maison *maison;
-    struct tourpos *nextMaison;
+    struct tourpos *rightMaison;
+    struct tourpos *leftMaison; 
 }TourPos;
+
+typedef struct tour
+{
+    TourPos *headOfTour;
+    TourPos *tailOfTour;
+    double TotDistance;
+    int nbmaison;
+}Tour;
+
+
 
 // Crée un tour vide
 Tour *createEmptyTour(void);
