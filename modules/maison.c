@@ -6,6 +6,12 @@
 
 Maison* createMaison(const char *name, double x, double y)
 {
+    if(name==NULL)
+    {
+        fprintf(stderr, "createMaison : no name was passed");
+        exit(1);
+    }
+    
     Maison *Newmaison = (Maison *)malloc(sizeof(Maison));
     strcpy(Newmaison->adress, name);
     Newmaison->xpos = x;
@@ -16,23 +22,43 @@ Maison* createMaison(const char *name, double x, double y)
 
 double getMaisonX(Maison *maison)
 {
+    if(maison==NULL)
+    {
+        fprintf(stderr, "getMaisonX : no house was passed");
+        exit(1);
+    }
 
      return maison->xpos;
 }
 
 double getMaisonY(Maison *maison)
 {
-     return maison->ypos;
+    if(maison==NULL)
+    {
+        fprintf(stderr, "getMaisonY : no house was passed");
+        exit(1);
+    }
+    return maison->ypos;
 }
 
 
 const char *getMaisonAdress(Maison *maison)
 {
+    if(maison==NULL)
+    {
+        fprintf(stderr, "getMaisonAdress : no house was passed");
+        exit(1);
+    }
     return maison->adress;
 }
 
 double distanceBetweenMaisons(Maison *m1, Maison *m2)
 {
+    if(m1==NULL && m2==NULL)
+    {
+        fprintf(stderr, "gdistanceBetweenMaisons : no house was passed");
+        exit(1);
+    }
     double dx = m1->xpos - m2->xpos;
     double dy = m1->ypos - m2->ypos;
 
@@ -41,6 +67,11 @@ double distanceBetweenMaisons(Maison *m1, Maison *m2)
 
 void freeMaison(Maison *maison)
 {
+    if(maison==NULL)
+    {
+        fprintf(stderr, "freeMaison :  no house was passed");
+        exit(1);
+    }
     free(maison->adress);
     free(maison);
 }

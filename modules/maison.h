@@ -26,18 +26,13 @@ Maison* createMaison(const char *name, double x, double y);
 double getMaisonX(Maison *maison);
 double getMaisonY(Maison *maison);
 
-
 //Renvoie l'adress d'une maison
 const char *getMaisonAdress(Maison *maison);
-
 
 // Renvoie la distance Euclidienne entre deux maisons
 double distanceBetweenMaisons(Maison *m1, Maison *m2);
 
 // Libère la mémoire prise par une maison
 void freeMaison(Maison *maison);
-
-
-
 
 #endif

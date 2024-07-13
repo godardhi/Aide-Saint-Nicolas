@@ -5,9 +5,9 @@
 #include "tour.c"
 
 
-Tour *heuristic1(Tour *tour);
+TourPos *heuristic1(TourPos *tour);
 
-Tour *heuristic2(Tour *tour);
+TourPos *heuristic2(TourPos *tour);
 
 #endif
 
